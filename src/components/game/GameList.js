@@ -27,6 +27,28 @@ export const GameList = (props) => {
                                 history.push({ pathname: `/games/edit/${game.id}` })
                             }}
                         >Edit Game</button>
+                        <button className="btn"
+                            onClick={() => {
+                            const deleteGame = (g) => {
+                                const requestOptions = {
+                                    method: 'DELETE',
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        "Authorization": `Token ${localStorage.getItem("lu_token")}`
+                                    },
+                                    body: JSON.stringify(g)
+                                };
+                                return fetch(`http://localhost:8000/games/${game.id}`, requestOptions)
+                            }
+                            deleteGame()
+                            .then(() => {
+                                history.push("/events")
+                            })
+                            .then(() => {
+                                history.push("/games")
+                            })
+                        }}
+                        >Delete Game</button>
                         <br></br>
                         <br></br>
                     </section>

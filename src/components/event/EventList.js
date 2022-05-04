@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
-import { getEvents } from "./EventManager.js"
+import { deleteEvent, getEvents } from "./EventManager.js"
 import { useHistory } from 'react-router-dom'
 
 export const EventList = (props) => {
-    const [ events, setEvents ] = useState([])
+    const [events, setEvents] = useState([])
     const history = useHistory()
 
     useEffect(() => {
@@ -13,10 +13,10 @@ export const EventList = (props) => {
     return (
         <article className="events">
             <button className="btn btn-2 btn-sep icon-create"
-    onClick={() => {
-        history.push({ pathname: "/events/new" })
-    }}
->Register New Event</button>
+                onClick={() => {
+                    history.push({ pathname: "/events/new" })
+                }}
+            >Register New Event</button>
             {
                 events.map(e => {
                     return <section key={`event--${e.id}`} className="event">
@@ -28,6 +28,29 @@ export const EventList = (props) => {
                                 history.push({ pathname: `/events/edit/${e.id}` })
                             }}
                         >Edit Event</button>
+                        <button className="btn"
+                            onClick={() => {
+                                const deleteEvent = (event) => {
+                                    const requestOptions = {
+                                        method: 'DELETE',
+                                        headers: {
+                                            "Content-Type": "application/json",
+                                            "Authorization": `Token ${localStorage.getItem("lu_token")}`
+                                        },
+                                        body: JSON.stringify(event)
+                                    };
+                                    return fetch(`http://localhost:8000/events/${e.id}`, requestOptions)
+                                }
+                                deleteEvent()
+                                // .then(getEvents())
+                                .then(() => {
+                                    history.push("/games")
+                                })
+                                .then(() => {
+                                    history.push("/events")
+                                })
+                            }}
+                        >Delete Event</button>
                         <br></br>
                         <br></br>
                         <br></br>
