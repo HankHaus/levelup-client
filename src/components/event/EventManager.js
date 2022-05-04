@@ -19,3 +19,15 @@ export const createEvent = (event) => {
     return fetch('http://localhost:8000/events', requestOptions)
         .then(response => response.json())
 }
+
+// export const deleteEvent = (event) => {
+//     const requestOptions = {
+//         method: 'DELETE',
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Authorization": `Token ${localStorage.getItem("lu_token")}`
+//         },
+//         body: JSON.stringify(event)
+//     };
+//     return fetch(`http://localhost:8000/events/${e.id}`, requestOptions)
+// }
