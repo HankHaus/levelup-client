@@ -23,6 +23,14 @@ export const EventList = (props) => {
                         <div className="event__game">{e.game.title} organized by {e.organizer.user.username}</div>
                         <div className="event__time__date">being held at {e.time} on {e.date}</div>
                         <div className="event__description">{e.description}</div>
+                        <button className="btn"
+                            onClick={() => {
+                                history.push({ pathname: `/events/edit/${e.id}` })
+                            }}
+                        >Edit Event</button>
+                        <br></br>
+                        <br></br>
+                        <br></br>
                     </section>
                 })
             }
