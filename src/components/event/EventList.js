@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { deleteEvent, getEvents } from "./EventManager.js"
+import { deleteEvent, getEvents, joinEvent, leaveEvent } from "./EventManager.js"
 import { useHistory } from 'react-router-dom'
 
 export const EventList = (props) => {
@@ -42,18 +42,39 @@ export const EventList = (props) => {
                                     return fetch(`http://localhost:8000/events/${e.id}`, requestOptions)
                                 }
                                 deleteEvent()
-                                // .then(getEvents())
-                                .then(() => {
-                                    history.push("/games")
-                                })
-                                .then(() => {
-                                    history.push("/events")
-                                })
+                                    // .then(getEvents())
+                                    .then(() => {
+                                        history.push("/games")
+                                    })
+                                    .then(() => {
+                                        history.push("/events")
+                                    })
                             }}
                         >Delete Event</button>
-                        <br></br>
-                        <br></br>
-                        <br></br>
+                        {
+                            e.joined
+                                ? <button onClick={() => {
+                                    leaveEvent(e.id)
+                                        .then(() => getEvents())
+                                        .then(() => {
+                                            history.push("/games")
+                                        })
+                                        .then(() => {
+                                            history.push("/events")
+                                        })
+                                }}>Leave Event</button>
+                                : <button onClick={() => {
+                                    joinEvent(e.id)
+                                        .then(() => getEvents())
+                                        .then(() => {
+                                            history.push("/games")
+                                        })
+                                        .then(() => {
+                                            history.push("/events")
+                                        })
+                                }}>Join Event</button>
+                        }
+                        <hr></hr>
                     </section>
                 })
             }
