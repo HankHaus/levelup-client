@@ -22,34 +22,6 @@ export const GameEditForm = () => {
         }, [gameId]
     )
 
-    // const [currentGame, setCurrentGame] = useState({
-    //     skill_level: 3,
-    //     number_of_players: 1,
-    //     title: ``,
-    //     maker: "c",
-    //     game_type: 2
-    // })
-
-
-    // useEffect(() => {
-    //     assignGame(currentGame)
-    // }, []) 
-
-    // useEffect(() => {
-    //     assignGame(currentGame.number_of_players)
-    // }, [currentGame.number_of_players])
-
-    // useEffect(() => {
-    //     assignGame(currentGame.title)
-    // }, [currentGame.title])
-
-    // useEffect(() => {
-    //     assignGame(currentGame.maker)
-    // }, [currentGame.maker])
-
-    // useEffect(() => {
-    //     assignGame(currentGame.game_type)
-    // }, [currentGame.game_type])
 
     useEffect(() => {
         // TODO: Get the game types, then set the state
